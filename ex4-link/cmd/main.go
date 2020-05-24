@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	link "gophercises/ex4-link"
 	"log"
@@ -20,7 +21,10 @@ var htmlEx1 = `
 `
 
 func main() {
-	f, err := os.Open("../ex4.html")
+	filename := flag.String("html", "ex1.html", "input of html file")
+	flag.Parse()
+
+	f, err := os.Open(*filename)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -28,5 +32,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("links: %d\n%+v\n", len(links), links)
+	fmt.Printf("%+v\n", links)
 }
